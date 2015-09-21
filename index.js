@@ -24,76 +24,66 @@ function check () {
   var failures = []
   var maxver
 
-  if (args.length === 1 && args[0] === '*') args = module.exports.features
+  if (args.length === 1 && args[0] === '*') {
+    args = featureNames
+  }
 
   args.forEach(function (name) {
-    var feature = toFeature(name)
+    var feature = features[name]
     if (!feature) throw new Error('Unknown feature: ' + feature)
 
-    try {
-      if (!feature.run()) fail(name, feature)
-    } catch (e) {
-      fail(name, feature)
+    if (!run(feature)) {
+      failures.push(name)
+      if (feature.since &&
+        (!maxver ||
+        require('semver').satisfies(maxver, '< ' + feature.since))) {
+        maxver = feature.since
+      }
     }
   })
-
-  function fail (name, feature) {
-    failures.push(name)
-    if (feature.since &&
-      (!maxver ||
-      require('semver').satisfies(maxver, '< ' + feature.since))) {
-      maxver = feature.since
-    }
-  }
 
   if (failures.length) {
     return { features: failures, minVersion: maxver }
   }
 }
 
-function toFeature (obj) {
-  if (features[obj]) {
-    obj = features[obj]
+/* eslint-disable no-new-func, no-eval */
+function run (feature) {
+  if (feature.fn) {
+    try { new Function(feature.fn)(); return true } catch (e) { }
+  } else {
+    try { return eval(feature.eval) } catch (e) { }
   }
-
-  // Handle checks
-  if (obj) {
-    obj.run = function () {
-      return eval(obj.check) // eslint-disable-line
-    }
-  }
-
-  return obj
 }
 
 var features = {
   'generators': {
     since: '1.0.0',
-    check: '(function* () {}); true'
+    fn: '(function* () {}); return true'
   },
   'let': {
     since: '1.0.0',
-    check: '"use strict"; let a; true'
+    fn: '"use strict"; let a; return true'
   },
   'fat arrow': {
     since: '4.0.0',
-    check: '(() => {}); true'
+    fn: '(() => {}); return true'
   },
   'promise': {
     since: '1.0.0',
-    check: 'Promise'
+    eval: 'Promise'
   },
   'symbol': {
     since: '1.0.0',
-    check: 'Symbol',
+    eval: 'Symbol'
   },
   'weakmap': {
     since: '1.0.0',
-    check: 'WeakMap'
+    eval: 'WeakMap'
   },
   'class': {
     since: '1.0.0',
-    check: '"use strict"; class A { }'
+    eval: '"use strict"; class A { }'
   }
 }
 
