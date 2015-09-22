@@ -1,3 +1,11 @@
+/**
+ * Checks for feature support. Throws an exception if some are unavailable.
+ *
+ *     fail('class', 'weakmap')
+ *     // "Error: Your platform doesn't support these features: class.
+ *     // Please upgrade to Node.js v1.0.0 or above."
+ */
+
 function fail () {
   var res = check.apply(this, arguments)
 
@@ -18,6 +26,14 @@ function fail () {
     throw err
   }
 }
+
+/**
+ * Checks for feature support. Returns an object or null.
+ *
+ *     unsupported = check('class', 'weakmap')
+ *     unsupported.features   //=> ['class']
+ *     unsupported.minVersion //=> '1.0.0'
+ */
 
 function check () {
   var args = [].slice.call(arguments)
