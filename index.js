@@ -75,7 +75,7 @@ function run (feature) {
 var features = {
   'generators': {
     since: '1.0.0',
-    fn: '(function* () {}); return true'
+    eval: '(function* () {})'
   },
   'let': {
     since: '1.0.0',
@@ -83,7 +83,7 @@ var features = {
   },
   'fat arrow': {
     since: '4.0.0',
-    fn: '(() => {}); return true'
+    eval: '(() => {})'
   },
   'promise': {
     since: '1.0.0',
@@ -100,6 +100,10 @@ var features = {
   'class': {
     since: '1.0.0',
     eval: '"use strict"; class A { }'
+  },
+  'template string': {
+    since: '1.0.0',
+    eval: '`...`'
   }
 }
 
