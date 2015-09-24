@@ -52,7 +52,7 @@ function check () {
       failures.push(name)
       if (feature.since &&
         (!maxver ||
-        require('semver').satisfies(maxver, '< ' + feature.since))) {
+        (versionToInt(maxver) < versionToInt(feature.since)))) {
         maxver = feature.since
       }
     }
@@ -105,6 +105,13 @@ var features = {
     since: '1.0.0',
     eval: '`...`'
   }
+}
+
+// Converts a semver to an integer you can compare with
+function versionToInt (version) {
+  return version.split('.').reduce(function (result, v, idx) {
+    return result + (+v) * Math.pow(2, 8 * (2-idx))
+  }, 0)
 }
 
 var featureNames = Object.keys(features)

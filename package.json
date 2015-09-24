@@ -6,9 +6,7 @@
   "bugs": {
     "url": "https://github.com/rstacruz/node-feature-detect/issues"
   },
-  "dependencies": {
-    "semver": "^5.0.3"
-  },
+  "dependencies": {},
   "devDependencies": {},
   "homepage": "https://github.com/rstacruz/node-feature-detect#readme",
   "keywords": [
@@ -23,6 +21,6 @@
     "url": "git+https://github.com/rstacruz/node-feature-detect.git"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "node example.js"
   }
 }
