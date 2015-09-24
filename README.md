@@ -13,6 +13,15 @@ detect('class', 'generators')
 // { unsupported: 'class', minVersion: '4.0.0' }
 ```
 
+or:
+
+```js
+var unsupported = detect('let')
+if (unsupported) {
+  // ...
+}
+```
+
 Or you can automatically fail:
 
 ```js
