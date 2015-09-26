@@ -1,4 +1,12 @@
 var features = {
+  'class': {
+    since: '1.0.0',
+    eval: '"use strict"; class A { }'
+  },
+  'fat arrow': {
+    since: '4.0.0',
+    eval: '(() => {})'
+  },
   'generators': {
     since: '1.0.0',
     eval: '(function* () {})'
@@ -7,9 +15,9 @@ var features = {
     since: '1.0.0',
     fn: '"use strict"; let a; return true'
   },
-  'fat arrow': {
+  'object.assign': {
     since: '4.0.0',
-    eval: '(() => {})'
+    eval: 'Object.assign'
   },
   'promise': {
     since: '1.0.0',
@@ -19,21 +27,13 @@ var features = {
     since: '1.0.0',
     eval: 'Symbol'
   },
-  'weakmap': {
-    since: '1.0.0',
-    eval: 'WeakMap'
-  },
-  'class': {
-    since: '1.0.0',
-    eval: '"use strict"; class A { }'
-  },
   'template string': {
     since: '1.0.0',
     eval: '`...`'
   },
-  'object.assign': {
-    since: '4.0.0',
-    eval: 'Object.assign'
+  'weakmap': {
+    since: '1.0.0',
+    eval: 'WeakMap'
   }
 }
 

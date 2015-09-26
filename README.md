@@ -6,8 +6,7 @@ Checks for features.
 var detect = require('node-feature-detect')
 
 detect.features
-// [ 'generators', 'let', 'fat arrow', 'promise', 'symbol', 'weakmap',
-//   'class', 'template string' ]
+// [ 'generators', 'let', 'fat arrow', ... ]
 
 detect('class', 'generators')
 // { unsupported: 'class', minVersion: '4.0.0' }
@@ -30,6 +29,19 @@ detect.fail('class', 'generators')
 // Error: Your platform doesn't support these features: generators, class.
 // Please upgrade to Node.js v4.0.0 or above.
 ```
+
+Features:
+
+- `class`
+- `fat arrow`
+- `generators`
+- `let`
+- `object.assign`
+- `promise`
+- `symbol`
+- `template string`
+- `weakmap`
+
 
 ## Thanks
 
