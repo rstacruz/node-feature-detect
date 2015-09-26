@@ -30,6 +30,10 @@ var features = {
   'template string': {
     since: '1.0.0',
     eval: '`...`'
+  },
+  'object.assign': {
+    since: '4.0.0',
+    eval: 'Object.assign'
   }
 }
 
@@ -52,7 +56,7 @@ function check () {
   }
 
   args.forEach(function (name) {
-    var feature = features[name]
+    var feature = features[name.toLowerCase()]
     if (!feature) throw new Error('Unknown feature: ' + feature)
 
     if (!run(feature)) {
